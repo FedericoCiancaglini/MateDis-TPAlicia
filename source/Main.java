@@ -6,25 +6,19 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         GrafoDirigidoPonderado grafo =  new GrafoDirigidoPonderado();
+        grafo.addVertex(0);
         grafo.addVertex(1);
         grafo.addVertex(2);
-        grafo.addVertex(3);
-        grafo.addVertex(4);
-        grafo.addVertex(5);
 
-        grafo.addEdge(0,1,10);
-        grafo.addEdge(0,3,30);
-        grafo.addEdge(0,4,100);
-        grafo.addEdge(1,2,50);
-        grafo.addEdge(2,4,10);
-        grafo.addEdge(3,2,20);
-        grafo.addEdge(3,4,60);
+        grafo.addEdge(2,1,10);
+        grafo.addEdge(1,0,20);
+        grafo.addEdge(2,0,100);
 
         DijkstraAlgorithm dijkstra = new DijkstraAlgorithm();
 
         dijkstra.printGraph(grafo);
 
-        List<List<Integer>> dijkstraArray = dijkstra.dijkstra(grafo, 0);
+        List<List<Integer>> dijkstraArray = dijkstra.dijkstra(grafo, 2);
 
         System.out.println("\nLess expensive paths:");
         for (int i = 0; i < dijkstraArray.size(); i++) {

@@ -105,6 +105,6 @@ public class GrafoDirigidoPonderado<T> implements IGraph {
 
     @Override
     public int getIndex(Object vertex) {
-        return 0;
+        return vertexes.indexOf(vertex);
     }
 }

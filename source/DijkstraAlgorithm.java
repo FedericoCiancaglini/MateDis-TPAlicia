@@ -37,13 +37,13 @@ public class DijkstraAlgorithm<T> {
             }
         }
 
-        return redoPaths(p, graph.getVertexes());
+        return redoPaths(p, graph.getVertexes(), begin);
     }
 
     private int getMinIndex(int[] d, T[] s){
         int min = Integer.MAX_VALUE;
         int minIndex = 0;
-        for (int i = 0; i < s.length -1; i++) {
+        for (int i = 0; i < s.length; i++) {
             if(min > d[(Integer) s[i]] && d[(Integer) s[i]] != 0){
                 min = d[(Integer) s[i]];
                 minIndex = (Integer) s[i];
@@ -63,24 +63,25 @@ public class DijkstraAlgorithm<T> {
     public T[] remove(T[] s, int minIndex){
         T[] result = (T[]) new Object[s.length-1];
         for(int i = 0; i < s.length; i++){
-             result[i] = s[i];
             if(s[i].equals(minIndex)){
                 for(int j = i; j < s.length - 1; j++){
                     result[j] = s[j+1];
                 }
                 return result;
+            } else {
+                result[i] = s[i];
             }
         }
         return result;
     }
 
-    public List<List<T>> redoPaths(T[] p, List<T> vertex){
+    public List<List<T>> redoPaths(T[] p, List<T> vertex, T begin){
         List<List<T>> result = new ArrayList<>(p.length);
         for (int j = 0; j < p.length; j++) {
             int i = j;
             List<T> list = new ArrayList<>();
             list.add(vertex.get(i));
-            while ((Integer)p[i] != 0){
+            while (p[i] != begin){
                 list.add(p[i]);
                 i = (Integer) p[i];
             }
