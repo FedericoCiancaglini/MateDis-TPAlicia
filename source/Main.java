@@ -1,14 +1,16 @@
+import java.util.List;
+
 /**
  * @author Florencia Vimberg
  */
 public class Main {
     public static void main(String[] args) {
         GrafoDirigidoPonderado grafo =  new GrafoDirigidoPonderado();
-        grafo.addVertex(0);
         grafo.addVertex(1);
         grafo.addVertex(2);
         grafo.addVertex(3);
         grafo.addVertex(4);
+        grafo.addVertex(5);
 
         grafo.addEdge(0,1,10);
         grafo.addEdge(0,3,30);
@@ -22,10 +24,23 @@ public class Main {
 
         dijkstra.printGraph(grafo);
 
-        Object[] dijkstraArray = dijkstra.dijkstra(grafo, 4);
+        List<List<Integer>> dijkstraArray = dijkstra.dijkstra(grafo, 0);
 
-        for (int i = 0; i < dijkstraArray.length; i++) {
-            System.out.println(dijkstraArray[i]);
+        System.out.println("\nLess expensive paths:");
+        for (int i = 0; i < dijkstraArray.size(); i++) {
+            System.out.println(print(dijkstraArray.get(i)));
         }
+    }
+
+    private static String print(List<Integer> list) {
+        String result = "";
+        for (int i = 0; i < list.size() ; i++) {
+            if(i == list.size()-1){
+                result += list.get(i);
+            } else {
+                result += list.get(i) + " -> \t";
+            }
+        }
+        return result;
     }
 }
