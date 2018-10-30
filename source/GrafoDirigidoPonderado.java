@@ -91,7 +91,7 @@ public class GrafoDirigidoPonderado<T> implements IGraph {
     public List<EdgeDirigidoPonderado> getAdyList(Object v) {
         List<EdgeDirigidoPonderado> adyList = new ArrayList<>();
         for (EdgeDirigidoPonderado adyList1 : edges) {
-            if (adyList1.getFrom() == v) {
+            if (adyList1.getFrom().equals(v)) {
                 adyList.add(adyList1);
             }
         }

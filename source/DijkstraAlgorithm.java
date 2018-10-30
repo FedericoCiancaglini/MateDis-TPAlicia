@@ -52,7 +52,7 @@ public class DijkstraAlgorithm<T> {
         return minIndex;
     }
 
-    public void printGraph(GrafoDirigidoPonderado<T> graph) {
+    void printGraph(GrafoDirigidoPonderado<T> graph) {
         for (int i = 0; i < graph.getVertexes().size(); i++) {
             for (int j = 0; j < graph.getAdyList(i).size(); j++) {
                 System.out.println(graph.getVertexes().get(i) + " --- "+graph.getAdyList(i).get(j).getTo() + " value: "+ graph.getAdyList(i).get(j).getValue());
@@ -60,7 +60,7 @@ public class DijkstraAlgorithm<T> {
         }
     }
 
-    public T[] remove(T[] s, int minIndex){
+    private T[] remove(T[] s, int minIndex){
         T[] result = (T[]) new Object[s.length-1];
         for(int i = 0; i < s.length; i++){
             if(s[i].equals(minIndex)){
@@ -75,7 +75,7 @@ public class DijkstraAlgorithm<T> {
         return result;
     }
 
-    public List<List<T>> redoPaths(T[] p, List<T> vertex, T begin){
+    private List<List<T>> redoPaths(T[] p, List<T> vertex, T begin){
         List<List<T>> result = new ArrayList<>(p.length);
         for (int j = 0; j < p.length; j++) {
             int i = j;
@@ -87,6 +87,18 @@ public class DijkstraAlgorithm<T> {
             }
             list.add(p[i]);
             result.add(list);
+        }
+        return result;
+    }
+
+    String printPath(List<Integer> list) {
+        String result = "";
+        for (int i = 0; i < list.size() ; i++) {
+            if(i == list.size()-1){
+                result += list.get(i);
+            } else {
+                result += list.get(i) + " -> \t";
+            }
         }
         return result;
     }
