@@ -13,7 +13,11 @@ public interface IGraph<T> {
     int order();
     int amtEdges();
     T vertex(int v);
+
+    // Todas las aristas que salen del vertice v
     List<EdgeDirigidoPonderado> getAdyList(T v);
+
+    // Todos los vertices a los que se puede llegar desde el vertice vertex
     List<T> getAdyListElements(T vertex);
     int getIndex(T vertex);
 }

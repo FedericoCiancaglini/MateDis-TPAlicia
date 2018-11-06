@@ -35,4 +35,8 @@ public class EdgeDirigidoPonderado<T> {
     public void setValue(int value) {
         this.value = value;
     }
+
+    public String toString() {
+        return "<" + from + ", " + to + ", " + value + ">";
+    }
 }
