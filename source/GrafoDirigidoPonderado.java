@@ -41,29 +41,15 @@ public class GrafoDirigidoPonderado<T> implements IGraph {
     }
 
     @Override
-    public void addVertex(Object vertex) {
-        vertexes.add((T) vertex);
-        n++;
-    }
-
-    @Override
-    public void addEdge(int v, int w, int value) {
-        edges.add(new EdgeDirigidoPonderado(v,w,value));
-        alpha++;
-    }
-
-    @Override
-    public void removeEdge(int v, int w) {
-
-    }
-
-    @Override
-    public void removeVertex(int v) {
-
-    }
-
-    @Override
     public boolean hasEdge(int v, int w) {
+        Vertex vertex = (Vertex) vertex(v);
+        Vertex to = (Vertex) vertex(w);
+        List<EdgeDirigidoPonderado> adyList = getAdyList(vertex);
+        for (int i = 0; i < adyList.size(); i++) {
+            if(adyList.get(i).getTo() == to){
+                return true;
+            }
+        }
         return false;
     }
 
@@ -74,17 +60,17 @@ public class GrafoDirigidoPonderado<T> implements IGraph {
 
     @Override
     public int order() {
-        return 0;
+        return n;
     }
 
     @Override
     public int amtEdges() {
-        return 0;
+        return alpha;
     }
 
     @Override
     public Object vertex(int v) {
-        return null;
+        return vertexes.get(v);
     }
 
     @Override
@@ -107,4 +93,39 @@ public class GrafoDirigidoPonderado<T> implements IGraph {
     public int getIndex(Object vertex) {
         return vertexes.indexOf(vertex);
     }
+
+    @Override
+    public void addVertex(Object vertex) {
+        vertexes.add((T) vertex);
+        n++;
+    }
+
+    @Override
+    public void addEdge(int v, int w, int value) {
+        edges.add(new EdgeDirigidoPonderado(v,w,value));
+        alpha++;
+    }
+
+    @Override
+    public void removeEdge(int v, int w) {
+        Vertex vertex = (Vertex) vertex(v);
+        Vertex to = (Vertex) vertex(w);
+        List<EdgeDirigidoPonderado> adyList = getAdyList(vertex);
+        for (int i = 0; i < adyList.size(); i++) {
+            if(adyList.get(i).getTo() == to){
+                adyList.remove(i);
+            }
+        }
+    }
+
+    @Override
+    public void removeVertex(int v) {
+        vertexes.remove(v);
+        Vertex vertex = (Vertex) vertex(v);
+        List<EdgeDirigidoPonderado> adyList = getAdyList(vertex);
+        for (int i = 0; i < adyList.size(); i++) {
+            adyList.remove(i);
+        }
+    }
+
 }
