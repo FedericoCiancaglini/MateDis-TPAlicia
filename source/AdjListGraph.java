@@ -54,7 +54,7 @@ public class AdjListGraph<V> {
     public List<V> getDFSPath(V v1, V v2) {
         clearVertexInfo();
 
-        List<V> path = new ArrayList<V>();
+        List<V> path = new ArrayList<>();
         getDFSPath(v1, v2, path);
 
         if (path.isEmpty()) {

@@ -23,10 +23,6 @@ public class GrafoDirigidoPonderado<T> implements IGraph {
         return vertexes;
     }
 
-    public List<EdgeDirigidoPonderado> getAdyLists() {
-        return edges;
-    }
-
     public int getCost(T from, T to){
         List<EdgeDirigidoPonderado> adyListFrom = getAdyList(from);
         if (from == to){

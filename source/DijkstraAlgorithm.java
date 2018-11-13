@@ -5,11 +5,11 @@ import java.util.List;
  * @author Florencia Vimberg
  */
 public class DijkstraAlgorithm<T> {
-    public List<List<T>> dijkstra(GrafoDirigidoPonderado<T> graph, T begin){
+    public List<List<T>> dijkstra(GrafoDirigidoPonderado<T> graph, Object begin){
         return dijkstra(graph, graph.getVertexes(), begin);
     }
 
-    private List<List<T>> dijkstra(GrafoDirigidoPonderado graph, List<T> vertex, T begin){
+    private List<List<T>> dijkstra(GrafoDirigidoPonderado graph, List<T> vertex, Object begin){
         int index = graph.getIndex(begin);
         T w = vertex.get(index);
         T[] s = (T[]) new Object[vertex.size()];
@@ -37,7 +37,7 @@ public class DijkstraAlgorithm<T> {
             }
         }
 
-        return redoPaths(p, graph.getVertexes(), begin);
+        return redoPaths(p, graph.getVertexes(), (T) begin);
     }
 
     private int getMinIndex(int[] d, T[] s){

@@ -41,7 +41,7 @@ public class Main {
     }
 
     private static  void createGraph(Scanner scanner){
-        System.out.println("Enter the amount of vertex for the graph: ");
+        System.out.println("ENTER THE AMOUNT OF VERTEX FOR THE GRAPH:");
         int capacity = scanner.nextInt();
         GrafoDirigidoPonderado grafo = new GrafoDirigidoPonderado();
         List<Integer> vertexValues = new ArrayList<>();
@@ -52,7 +52,7 @@ public class Main {
             grafo.addVertex(vertexValue);
         }
 
-        System.out.println("Enter the amount of edges for the graph: ");
+        System.out.println("ENTER THE AMOUNT OF EDGES FOR THE GRAPH: ");
         int amtEdges = scanner.nextInt();
 
         for (int i = 0; i < amtEdges; i++) {
@@ -129,7 +129,7 @@ public class Main {
                 "0. Exit program\n" +
                 "1. Create new graph\n" +
                 "2. Create random graph\n" +
-                "3. Print graph\n" +
+                "3. Print graphs\n" +
                 "Please enter an option: ");
     }
 }

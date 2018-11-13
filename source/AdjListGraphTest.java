@@ -12,6 +12,9 @@ public class AdjListGraphTest {
 
         System.out.println("Adjacency List:");
         System.out.println(airlineGraph.getAdjacencyList().values());
+
+        System.out.println("DFS");
+        System.out.println(airlineGraph.getDFSPath("DFW", "MIA"));
     }
 
     public static void testEdges(AdjListGraph<String> g) {
@@ -53,7 +56,7 @@ public class AdjListGraphTest {
         g.addEdge("DFW", "ORD", 600);
         g.addEdge("DFW", "SFO", 1100);
         g.addEdge("DFW", "JFK", 950);
-        g.addEdge("ORD", "DFW", 600);
+        g.addEdge("ORD", "MIA", 700);
         g.addEdge("MIA", "DFW", 1200);
         g.addEdge("MIA", "LAX", 2800);
         g.addEdge("JFK", "MIA", 1300);
