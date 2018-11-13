@@ -3,18 +3,17 @@ public class AdjListGraphTest {
         AdjListGraph<String> airlineGraph = new AdjListGraph<String>();
 
         buildGraph(airlineGraph);
+        System.out.println("Grafo:");
         System.out.println(airlineGraph);
 
         testEdges(airlineGraph);
         System.out.println();
 
         testDFS(airlineGraph);
+//        testBFS(airlineGraph);
 
         System.out.println("Adjacency List:");
         System.out.println(airlineGraph.getAdjacencyList().values());
-
-        System.out.println("DFS");
-        System.out.println(airlineGraph.getDFSPath("DFW", "MIA"));
     }
 
     public static void testEdges(AdjListGraph<String> g) {
@@ -32,6 +31,7 @@ public class AdjListGraphTest {
     }
 
     public static void testDFS(AdjListGraph<String> g) {
+        System.out.println("DFS Start");
         System.out.println("Path between BOS and LAX? " + g.hasPath("BOS", "LAX"));
         System.out.println("Edge between BOS and LAX: " + g.getDFSPath("BOS", "LAX"));
 
@@ -40,6 +40,20 @@ public class AdjListGraphTest {
 
         System.out.println("Path between SFO and LAX? " + g.hasPath("SFO", "LAX"));
         System.out.println("Edge between SFO and LAX: " + g.getDFSPath("SFO", "LAX"));
+        System.out.println("DFS End");
+    }
+
+    public static void testBFS(AdjListGraph<String> g) {
+        System.out.println("BFS Start");
+        System.out.println("Path between BOS and LAX? " + g.hasPath("BOS", "LAX"));
+        System.out.println("Edge between BOS and LAX: " + g.getBFSPath("BOS", "LAX"));
+
+        System.out.println("Path between ORD and LAX? " + g.hasPath("ORD", "LAX"));
+        System.out.println("Edge between ORD and LAX: " + g.getBFSPath("ORD", "LAX"));
+
+        System.out.println("Path between SFO and LAX? " + g.hasPath("SFO", "LAX"));
+        System.out.println("Edge between SFO and LAX: " + g.getBFSPath("SFO", "LAX"));
+        System.out.println("BFS End");
     }
 
     public static void buildGraph(AdjListGraph<String> g) {
@@ -56,7 +70,7 @@ public class AdjListGraphTest {
         g.addEdge("DFW", "ORD", 600);
         g.addEdge("DFW", "SFO", 1100);
         g.addEdge("DFW", "JFK", 950);
-        g.addEdge("ORD", "MIA", 700);
+        g.addEdge("ORD", "DFW", 600);
         g.addEdge("MIA", "DFW", 1200);
         g.addEdge("MIA", "LAX", 2800);
         g.addEdge("JFK", "MIA", 1300);

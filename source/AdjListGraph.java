@@ -54,7 +54,7 @@ public class AdjListGraph<V> {
     public List<V> getDFSPath(V v1, V v2) {
         clearVertexInfo();
 
-        List<V> path = new ArrayList<>();
+        List<V> path = new ArrayList<V>();
         getDFSPath(v1, v2, path);
 
         if (path.isEmpty()) {
@@ -88,7 +88,7 @@ public class AdjListGraph<V> {
         return path;
     }
 
-/*    public List<V> getBFSPath(V v1, V v2) {
+    public List<V> getBFSPath(V v1, V v2) {
         clearVertexInfo();
 
         List<V> path = new ArrayList<V>();
@@ -102,22 +102,24 @@ public class AdjListGraph<V> {
     }
 
     private List<V> getBFSPath(V v1, V v2, List<V> path) {
+        List<V> nextToVisit = new LinkedList<>();
+        nextToVisit.add(v1);
         path.add(v1);
-        Vertex<V> vInfo = vertex.get(v1);
-        vInfo.setVisited(true);
-
-        if (v1.equals(v2)) {
-            return path;
-        }
-
-        List<EdgeDirigidoPonderado<V>> edges = this.adjacencyList.get(v1);
-        for (EdgeDirigidoPonderado<V> e : edges) {
-            Vertex<V> vInfo2 = vertex.get(e);
-            if (!vInfo2.isVisited()) {
-                getBFSPath()
+        while (!nextToVisit.isEmpty()) {
+            Vertex<V> vInfo = vertex.get(v1);
+            if (vInfo == v2) {
+                return path;
+            }
+            if (vInfo.isVisited()) {
+                continue;
+            }
+            vInfo.setVisited(true);
+            for (EdgeDirigidoPonderado child : adjacencyList.get(vInfo.getV())) {
+                nextToVisit.add((V) child.getTo());
             }
         }
-    }*/
+        return null;
+    }
 
     public String toString() {
         Set<V> keys = adjacencyList.keySet();
