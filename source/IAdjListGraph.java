@@ -1,6 +1,6 @@
 import java.util.List;
 
-public interface AltIGraph<V> {
+public interface IAdjListGraph<V> {
     public void addVertex(V v);
 
     public void addEdge(V v1, V v2, int weight);

@@ -1,6 +1,6 @@
-public class GraphTest {
+public class AdjListGraphTest {
     public static void main(String[] args) {
-        Graph<String> airlineGraph = new Graph<String>();
+        AdjListGraph<String> airlineGraph = new AdjListGraph<String>();
 
         buildGraph(airlineGraph);
         System.out.println(airlineGraph);
@@ -14,7 +14,7 @@ public class GraphTest {
         System.out.println(airlineGraph.getAdjacencyList().values());
     }
 
-    public static void testEdges(Graph<String> g) {
+    public static void testEdges(AdjListGraph<String> g) {
         System.out.println("Edge between JFK and SFO? " + g.hasEdge("JFK", "SFO"));
         System.out.println("Edge between JFK and SFO: " + g.getEdge("JFK", "SFO"));
 
@@ -28,7 +28,7 @@ public class GraphTest {
         System.out.println("Edge between SFO and DFW: " + g.getEdge("SFO", "DFW"));
     }
 
-    public static void testDFS(Graph<String> g) {
+    public static void testDFS(AdjListGraph<String> g) {
         System.out.println("Path between BOS and LAX? " + g.hasPath("BOS", "LAX"));
         System.out.println("Edge between BOS and LAX: " + g.getDFSPath("BOS", "LAX"));
 
@@ -39,7 +39,7 @@ public class GraphTest {
         System.out.println("Edge between SFO and LAX: " + g.getDFSPath("SFO", "LAX"));
     }
 
-    public static void buildGraph(Graph<String> g) {
+    public static void buildGraph(AdjListGraph<String> g) {
         g.addVertex("LAX");
         g.addVertex("SFO");
         g.addVertex("DFW");

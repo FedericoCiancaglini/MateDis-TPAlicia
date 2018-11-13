@@ -1,10 +1,10 @@
 import java.util.*;
 
-public class Graph<V> {
+public class AdjListGraph<V> {
     private Map<V, List<EdgeDirigidoPonderado<V>>> adjacencyList;  // [vertices] -> [edge]
     private Map<V, Vertex<V>> vertex;     // [vertex] -> [info]
 
-    public Graph() {
+    public AdjListGraph() {
         this.adjacencyList = new HashMap<V, List<EdgeDirigidoPonderado<V>>>();
         this.vertex = new HashMap<V, Vertex<V>>();
     }
