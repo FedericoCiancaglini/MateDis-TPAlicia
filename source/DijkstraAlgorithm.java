@@ -5,28 +5,29 @@ import java.util.List;
  * @author Florencia Vimberg
  */
 public class DijkstraAlgorithm<T> {
-    //todo preguntar alicia si le pasamos a donde queremos ir o como seria sino
-    public Object[] dijkstra(GrafoDirigidoPonderado<T> graph, T end){
-        return dijkstra(graph, graph.getVertexes(), end);
+    public List<List<T>> dijkstra(GrafoDirigidoPonderado<T> graph, T begin){
+        return dijkstra(graph, graph.getVertexes(), begin);
     }
 
-    private Object[] dijkstra(GrafoDirigidoPonderado graph, List<T> vertex, T end){
-        T w = vertex.get(0);
-        List<T> s = new ArrayList<>();
-        for (int i = 1; i < graph.getVertexes().size(); i++) {
-            s.add((T) graph.getVertexes().get(i));
+    private List<List<T>> dijkstra(GrafoDirigidoPonderado graph, List<T> vertex, T begin){
+        int index = graph.getIndex(begin);
+        T w = vertex.get(index);
+        T[] s = (T[]) new Object[vertex.size()];
+        for (int i = 0; i < graph.getVertexes().size(); i++) {
+            s[i] = (T) graph.getVertexes().get(i);
         }
+        s = remove(s, index);
         int[] d = new int[vertex.size()];
-        Object[] p = new Object[vertex.size()];
+        T[] p = (T[]) new Object[vertex.size()];
         for (int i = 0; i < d.length ; i++) {
             d[i] = graph.getCost(w, i);
             p[i] =  w;
         }
 
-        while(s.size() > 1){
+        while(s.length > 1){
             int minIndex = getMinIndex(d,s);
             w = vertex.get(minIndex);
-            s.remove(w);
+            s = remove(s, minIndex);
 
             for (int i = 0; i < d.length; i++) {
                 if(graph.getCost(minIndex, i) + d[minIndex] < d[i] && graph.getCost(minIndex, i) + d[minIndex] > 0 ){
@@ -36,27 +37,22 @@ public class DijkstraAlgorithm<T> {
             }
         }
 
-        return p;
+        return redoPaths(p, graph.getVertexes(), begin);
     }
 
-    //todo esta proogna funciona mal
-    private int getMinIndex(int[] d, List<T> s){
+    private int getMinIndex(int[] d, T[] s){
         int min = Integer.MAX_VALUE;
         int minIndex = 0;
-        int[] num = new int[s.size()];
-        for (int i = 0; i < s.size(); i++) {
-            num[i] = d[(Integer)s.get(i)];
-        }
-        for (int i = 0; i < s.size(); i++) {
-            if(min > d[(Integer) s.get(i)] && d[(Integer) s.get(i)] != 0){
-                min = d[(Integer) s.get(i)];
-                minIndex = i;
+        for (int i = 0; i < s.length; i++) {
+            if(min > d[(Integer) s[i]] && d[(Integer) s[i]] != 0){
+                min = d[(Integer) s[i]];
+                minIndex = (Integer) s[i];
             }
         }
         return minIndex;
     }
 
-    public void printGraph(GrafoDirigidoPonderado<T> graph) {
+    void printGraph(GrafoDirigidoPonderado<T> graph) {
         for (int i = 0; i < graph.getVertexes().size(); i++) {
             for (int j = 0; j < graph.getAdyList(i).size(); j++) {
                 System.out.println(graph.getVertexes().get(i) + " --- "+graph.getAdyList(i).get(j).getTo() + " value: "+ graph.getAdyList(i).get(j).getValue());
@@ -64,7 +60,46 @@ public class DijkstraAlgorithm<T> {
         }
     }
 
-    public int getIndex(GrafoDirigidoPonderado grafo, T vertex) {
-        return grafo.getVertexes().indexOf(vertex);
+    private T[] remove(T[] s, int minIndex){
+        T[] result = (T[]) new Object[s.length-1];
+        for(int i = 0; i < s.length; i++){
+            if(s[i].equals(minIndex)){
+                for(int j = i; j < s.length - 1; j++){
+                    result[j] = s[j+1];
+                }
+                return result;
+            } else {
+                result[i] = s[i];
+            }
+        }
+        return result;
+    }
+
+    private List<List<T>> redoPaths(T[] p, List<T> vertex, T begin){
+        List<List<T>> result = new ArrayList<>(p.length);
+        for (int j = 0; j < p.length; j++) {
+            int i = j;
+            List<T> list = new ArrayList<>();
+            list.add(vertex.get(i));
+            while (p[i] != begin){
+                list.add(p[i]);
+                i = (Integer) p[i];
+            }
+            list.add(p[i]);
+            result.add(list);
+        }
+        return result;
+    }
+
+    String printPath(List<Integer> list) {
+        String result = "";
+        for (int i = 0; i < list.size() ; i++) {
+            if(i == list.size()-1){
+                result += list.get(i);
+            } else {
+                result += list.get(i) + " -> \t";
+            }
+        }
+        return result;
     }
 }
